@@ -1,18 +1,16 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
-import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
 
 const input = document.querySelector('#datetime-picker');
-const btn = document.querySelector('#data-start');
-const data_days = document.querySelector('#data-days');
-const data_hours = document.querySelector('#data-hours');
-const data_minutes = document.querySelector('#data-minutes');
-const data_seconds = document.querySelector('#data-seconds');
-let userSelectedDate = null;
-let timerId = null;
+const btn = document.querySelector('[data-start]');
+const data_days = document.querySelector('[data-days]');
+const data_hours = document.querySelector('[data-hours]');
+const data_minutes = document.querySelector('[data-minutes]');
+const data_seconds = document.querySelector('[data-seconds]');
 
-btn.disabled = true; // Кнопка неактивна при загрузке
+let userSelectedDate = null; // Сохраняем выбранную дату
+
+btn.disabled = true; // Делаем кнопку неактивной при загрузке страницы
 
 flatpickr(input, {
   enableTime: true,
@@ -24,40 +22,38 @@ flatpickr(input, {
     const now = new Date();
 
     if (selectedDate <= now) {
-      iziToast.error({
-        title: 'Error',
-        message: 'Please choose a date in the future',
-      });
-      btn.disabled = true;
+      alert('Please choose a date in the future'); // Отображаем сообщение
+      btn.disabled = true; // Делаем кнопку неактивной
     } else {
       userSelectedDate = selectedDate;
-      btn.disabled = false;
+      btn.disabled = false; // Активируем кнопку, если дата валидная
     }
   },
 });
 
 btn.addEventListener('click', () => {
-  if (timerId) return; // Избегаем повторного запуска таймера
-
-  input.disabled = true;
-  btn.disabled = true;
-
-  timerId = setInterval(() => {
-    const now = new Date();
-    const timeLeft = userSelectedDate - now;
-
-    if (timeLeft <= 0) {
-      clearInterval(timerId);
-      timerId = null;
-      input.disabled = false;
-      updateTimerDisplay({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-      return;
-    }
-
-    const time = convertMs(timeLeft);
-    updateTimerDisplay(time);
-  }, 1000);
+  if (userSelectedDate) {
+    startCountdown();
+    btn.disabled = true;
+    input.disabled = true;
+  }
 });
+
+function startCountdown() {
+  const intervalId = setInterval(() => {
+    const now = new Date();
+    const msLeft = userSelectedDate - now;
+
+    if (msLeft <= 0) {
+      clearInterval(intervalId);
+      updateDisplay(0, 0, 0, 0);
+      input.disabled = false; // После завершения таймера активируем input для новой даты
+    } else {
+      const { days, hours, minutes, seconds } = convertMs(msLeft);
+      updateDisplay(days, hours, minutes, seconds);
+    }
+  }, 1000);
+}
 
 function convertMs(ms) {
   const second = 1000;
@@ -73,7 +69,7 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
-function updateTimerDisplay({ days, hours, minutes, seconds }) {
+function updateDisplay(days, hours, minutes, seconds) {
   data_days.textContent = addLeadingZero(days);
   data_hours.textContent = addLeadingZero(hours);
   data_minutes.textContent = addLeadingZero(minutes);
