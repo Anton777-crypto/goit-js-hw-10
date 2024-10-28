@@ -3,7 +3,7 @@ import 'flatpickr/dist/flatpickr.min.css';
 
 const body = document.querySelector('.main');
 const input = document.querySelector('#datetime-picker');
-const btn = document.querySelector('.button');
+const btn = document.querySelector('#data-start');
 
 input.addEventListener('change', () => {
   const selectData = new Date(input.value);
