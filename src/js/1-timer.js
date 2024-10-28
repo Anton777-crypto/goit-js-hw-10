@@ -2,7 +2,7 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
 const body = document.querySelector('.main');
-style.body.backgroundColor = 'blueviolet';
+body.style.backgroundColor = 'blueviolet';
 const input = document.querySelector('#datetime-picker');
 input.style.backgroundColor = 'blueviolet';
 flatpickr(input, {
