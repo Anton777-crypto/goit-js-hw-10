@@ -2,8 +2,19 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
 const body = document.querySelector('.main');
-
 const input = document.querySelector('#datetime-picker');
+const btn = document.querySelector('.button');
+
+input.addEventListener('change', () => {
+  const selectData = new Date(input.value);
+  const now = new Date();
+
+  if (selectData <= now) {
+    btn.disabled = true;
+  } else {
+    btn.disabled = false;
+  }
+});
 
 flatpickr(input, {
   enableTime: true,
