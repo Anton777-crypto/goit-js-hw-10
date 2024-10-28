@@ -1,13 +1,18 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 
 const input = document.querySelector('#datetime-picker');
 const btn = document.querySelector('#data-start');
-
 const data_days = document.querySelector('#data-days');
 const data_hours = document.querySelector('#data-hours');
 const data_minutes = document.querySelector('#data-minutes');
 const data_seconds = document.querySelector('#data-seconds');
+let userSelectedDate = null;
+let timerId = null;
+
+btn.disabled = true; // Кнопка неактивна при загрузке
 
 flatpickr(input, {
   enableTime: true,
@@ -15,19 +20,43 @@ flatpickr(input, {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    console.log(selectedDates[0]);
+    const selectedDate = selectedDates[0];
+    const now = new Date();
+
+    if (selectedDate <= now) {
+      iziToast.error({
+        title: 'Error',
+        message: 'Please choose a date in the future',
+      });
+      btn.disabled = true;
+    } else {
+      userSelectedDate = selectedDate;
+      btn.disabled = false;
+    }
   },
 });
 
-input.addEventListener('change', () => {
-  const selectData = new Date(input.value);
-  const now = new Date();
+btn.addEventListener('click', () => {
+  if (timerId) return; // Избегаем повторного запуска таймера
 
-  if (selectData <= now) {
-    btn.disabled = true;
-  } else {
-    btn.disabled = false;
-  }
+  input.disabled = true;
+  btn.disabled = true;
+
+  timerId = setInterval(() => {
+    const now = new Date();
+    const timeLeft = userSelectedDate - now;
+
+    if (timeLeft <= 0) {
+      clearInterval(timerId);
+      timerId = null;
+      input.disabled = false;
+      updateTimerDisplay({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+      return;
+    }
+
+    const time = convertMs(timeLeft);
+    updateTimerDisplay(time);
+  }, 1000);
 });
 
 function convertMs(ms) {
@@ -36,18 +65,21 @@ function convertMs(ms) {
   const hour = minute * 60;
   const day = hour * 24;
 
-  // Remaining days
   const days = Math.floor(ms / day);
-  // Remaining hours
   const hours = Math.floor((ms % day) / hour);
-  // Remaining minutes
   const minutes = Math.floor(((ms % day) % hour) / minute);
-  // Remaining seconds
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
   return { days, hours, minutes, seconds };
 }
 
-console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
-console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
-console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
+function updateTimerDisplay({ days, hours, minutes, seconds }) {
+  data_days.textContent = addLeadingZero(days);
+  data_hours.textContent = addLeadingZero(hours);
+  data_minutes.textContent = addLeadingZero(minutes);
+  data_seconds.textContent = addLeadingZero(seconds);
+}
+
+function addLeadingZero(value) {
+  return String(value).padStart(2, '0');
+}
