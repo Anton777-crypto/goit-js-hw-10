@@ -1,9 +1,23 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
-const body = document.querySelector('.main');
 const input = document.querySelector('#datetime-picker');
 const btn = document.querySelector('#data-start');
+
+const data_days = document.querySelector('#data-days');
+const data_hours = document.querySelector('#data-hours');
+const data_minutes = document.querySelector('#data-minutes');
+const data_seconds = document.querySelector('#data-seconds');
+
+flatpickr(input, {
+  enableTime: true,
+  time_24hr: true,
+  defaultDate: new Date(),
+  minuteIncrement: 1,
+  onClose(selectedDates) {
+    console.log(selectedDates[0]);
+  },
+});
 
 input.addEventListener('change', () => {
   const selectData = new Date(input.value);
@@ -14,16 +28,6 @@ input.addEventListener('change', () => {
   } else {
     btn.disabled = false;
   }
-});
-
-flatpickr(input, {
-  enableTime: true,
-  time_24hr: true,
-  defaultDate: new Date(),
-  minuteIncrement: 1,
-  onClose(selectedDates) {
-    console.log(selectedDates[0]);
-  },
 });
 
 function convertMs(ms) {
