@@ -5,7 +5,7 @@ import 'izitoast/dist/css/iziToast.min.css';
 
 const input = document.querySelector('number');
 const radio = document.querySelector('radio');
-const delay = input.value;
+const delay = 1000;
 
 const btn = document.querySelector('submit');
 function checkPromise() {
