@@ -21,7 +21,7 @@ btn.addEventListener('click', event => {
   if (!document.querySelector('.notification')) {
     document.body.innerHTML = `<div class="notification"></div>`;
 
-    const notification = document.querySelector('notification');
+    const notification = document.querySelector('.notification');
   }
   checkPromise()
     .then(message => {
