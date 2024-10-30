@@ -4,7 +4,7 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
 const input = document.querySelector('input[name="delay"]');
-const radio = document.querySelector('input[name="state"]');
+const radio = document.querySelectorAll('input[name="state"]');
 
 const btn = document.querySelector('.btn');
 
