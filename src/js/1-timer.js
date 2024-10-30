@@ -8,9 +8,9 @@ const data_hours = document.querySelector('[data-hours]');
 const data_minutes = document.querySelector('[data-minutes]');
 const data_seconds = document.querySelector('[data-seconds]');
 
-let userSelectedDate = null; // Сохраняем выбранную дату
+let userSelectedDate = null;
 
-btn.disabled = true; // Делаем кнопку неактивной при загрузке страницы
+btn.disabled = true;
 
 flatpickr(input, {
   enableTime: true,
@@ -22,11 +22,11 @@ flatpickr(input, {
     const now = new Date();
 
     if (selectedDate <= now) {
-      alert('Please choose a date in the future'); // Отображаем сообщение
-      btn.disabled = true; // Делаем кнопку неактивной
+      alert('Please choose a date in the future');
+      btn.disabled = true;
     } else {
       userSelectedDate = selectedDate;
-      btn.disabled = false; // Активируем кнопку, если дата валидная
+      btn.disabled = false;
     }
   },
 });
@@ -47,7 +47,7 @@ function startCountdown() {
     if (msLeft <= 0) {
       clearInterval(intervalId);
       updateDisplay(0, 0, 0, 0);
-      input.disabled = false; // После завершения таймера активируем input для новой даты
+      input.disabled = false;
     } else {
       const { days, hours, minutes, seconds } = convertMs(msLeft);
       updateDisplay(days, hours, minutes, seconds);
