@@ -7,12 +7,6 @@ const input = document.querySelector('number');
 const radio = document.querySelector('radio');
 const delay = input.value;
 
-// input.addEventListener('number', () => {
-//   if (input.value > 0 || radio.value('fulfilled')) {
-//     `✅ Fulfilled promise in ${delay}ms`;
-//   } else `❌ Rejected promise in ${delay}ms`;
-// });
-
 const btn = document.querySelector('submit');
 function checkPromise() {
   return new Promise((resolve, reject) => {
@@ -27,9 +21,9 @@ btn.addEventListener('click', event => {
 
   checkPromise()
     .then(message => {
-      console.log(message);
+      notification.innerHTML = `<div class="success">${message}</div>`;
     })
     .catch(message => {
-      console.log(message);
+      notification.innerHTML = `<div class="error">${message}</div>`;
     });
 });
