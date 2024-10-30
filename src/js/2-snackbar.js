@@ -49,7 +49,7 @@ form.addEventListener('submit', event => {
 
   const delay = Number(event.target.delay.value); // Отримуємо значення затримки
   const state = event.target.state.value; // Отримуємо значення стану (fulfilled або rejected)
-
+  const btn = document;
   const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
       if (state === 'fulfilled') {
@@ -76,4 +76,5 @@ form.addEventListener('submit', event => {
         position: 'topRight',
       });
     });
+  form.reset();
 });
