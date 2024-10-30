@@ -3,8 +3,8 @@ import iziToast from 'izitoast';
 // Додатковий імпорт стилів
 import 'izitoast/dist/css/iziToast.min.css';
 
-const input = document.querySelector('number');
-const radio = document.querySelector('radio');
+const input = document.querySelector('input[typr="number"]');
+const radio = document.querySelector('input[typr="radio"]');
 const delay = 1000;
 const btn = document.querySelector('.btn');
 
