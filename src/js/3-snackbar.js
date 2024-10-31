@@ -22,7 +22,7 @@ form.addEventListener('submit', event => {
     }
   }, value_input);
 });
-promis
+promise
   .then(value_input => {
     iziToast.success({
       title: 'Success',
