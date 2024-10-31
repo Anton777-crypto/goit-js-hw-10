@@ -12,7 +12,7 @@ form.addEventListener('submit', event => {
   //   const input = Number(event.target.input.value);
   const state = event.target.state.value;
   const btn = document;
-  const selectPromis = new Promis((resolve, reject) => {
+  const selectPromis = new Promise((resolve, reject) => {
     if (state === 'fulfilled') {
       resolve(`✅ Fulfilled promise in ${input}ms`);
     } else {
