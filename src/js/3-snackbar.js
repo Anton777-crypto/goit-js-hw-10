@@ -9,7 +9,6 @@ const radio = document.querySelectorAll('input[name="state"]');
 const btn = document.querySelector('.btn');
 
 function checkPromise() {
-  const selectedState = radio.find(radio => radio.checked)?.value;
   return new Promise((resolve, reject) => {
     if (input.value > 0 && radio.value('fulfilled')) {
       setTimeout(
@@ -38,3 +37,24 @@ btn.addEventListener('click', event => {
       notification.innerHTML = `<div class="error">${message}</div>`;
     });
 });
+
+// const radioButtons = document.querySelectorAll('.input_radio');
+//     const submitButton = document.getElementById('submitBtn');
+
+//     submitButton.addEventListener('click', function() {
+//         let selectedState;
+//         radioButtons.forEach(radio => {
+//             if (radio.checked) {
+//                 selectedState = radio.value;
+//             }
+//         });
+
+//         if (selectedState) {
+//             // Выбрано значение selectedState, выполните необходимые действия здесь
+//             console.log('Выбрано значение:', selectedState);
+//         } else {
+//             // Ни один из радио-кнопок не выбран
+//             console.log('Пожалуйста, выберите один из вариантов');
+//         }
+//     });
+// </script>
