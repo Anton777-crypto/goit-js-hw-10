@@ -16,24 +16,26 @@ form.addEventListener('submit', event => {
 
   const selectPromis = new Promis((resolve, reject) => {
     if (select_input === 'fulfilled') {
-      resolve(`✅ Fulfilled promise in ${delay}ms`);
+      resolve(`✅ Fulfilled promise in ${value_input}ms`);
     } else {
-      reject(`❌ Rejected promise in ${delay}ms`);
+      reject(`❌ Rejected promise in ${value_input}ms`);
     }
   }, value_input);
 });
-selectPromis()
+promis
   .then(value_input => {
     iziToast.success({
       title: 'Success',
       message: `✅ Fulfilled promise in ${delay}ms`,
-      position: 'topRight',
+      position: 'center',
+      color: 'yelow',
     });
   })
   .capth(value_input => {
     iziToast.error({
       title: 'error',
       message: `✅ Fulfilled promise in ${delay}ms`,
-      position: 'topRight',
+      position: 'center',
+      color: 'blue',
     });
   });
