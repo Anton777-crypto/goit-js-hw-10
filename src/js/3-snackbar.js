@@ -7,7 +7,9 @@ const form = document.querySelector('.form');
 form.addEventListener('submit', event => {
   event.preventDefault();
 
-  const input = Number(event.target.input.value);
+  const delay = Number(event.target.delay.value); // Отримуємо значення затримки
+
+  //   const input = Number(event.target.input.value);
   const select_input = event.target.select_input.value;
   const btn = document;
   const selectPromis = new Promis((resolve, reject) => {
