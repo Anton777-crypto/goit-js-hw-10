@@ -10,10 +10,10 @@ form.addEventListener('submit', event => {
   const delay = Number(event.target.delay.value); // Отримуємо значення затримки
 
   //   const input = Number(event.target.input.value);
-  const select_input = event.target.select_input.value;
+  const state = event.target.state.value;
   const btn = document;
   const selectPromis = new Promis((resolve, reject) => {
-    if (select_input === 'fulfilled') {
+    if (state === 'fulfilled') {
       resolve(`✅ Fulfilled promise in ${input}ms`);
     } else {
       reject(`❌ Rejected promise in ${input}ms`);
@@ -21,7 +21,7 @@ form.addEventListener('submit', event => {
   }, input);
 
   selectPromis
-    .then(input => {
+    .then(delay => {
       iziToast.success({
         title: 'Success',
         message: `✅ Fulfilled promise in ${delay}ms`,
@@ -29,7 +29,7 @@ form.addEventListener('submit', event => {
         color: 'yelow',
       });
     })
-    .capth(input => {
+    .capth(delay => {
       iziToast.error({
         title: 'error',
         message: `✅ Fulfilled promise in ${delay}ms`,
@@ -37,4 +37,5 @@ form.addEventListener('submit', event => {
         color: 'blue',
       });
     });
+  form.reset();
 });
