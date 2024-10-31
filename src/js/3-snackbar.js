@@ -9,7 +9,7 @@ const radio = document.querySelectorAll('input[name="state"]');
 const btn = document.querySelector('.btn');
 
 function checkPromise() {
-  const selectedState = [...radio].find(radio => radio.checked)?.value;
+  const selectedState = radio.find(radio => radio.checked)?.value;
   return new Promise((resolve, reject) => {
     if (input.value > 0 && radio.value('fulfilled')) {
       setTimeout(
