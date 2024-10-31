@@ -28,7 +28,7 @@ form.addEventListener('submit', event => {
         color: 'yelow',
       });
     })
-    .capth(delay => {
+    .catch(delay => {
       iziToast.error({
         title: 'error',
         message: `✅ Fulfilled promise in ${delay}ms`,
