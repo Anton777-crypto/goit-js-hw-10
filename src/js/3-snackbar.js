@@ -9,7 +9,7 @@ form.addEventListener('submit', event => {
 
   const value_input = Number(event.target.value_input.value);
   const select_input = event.target.select_input.value;
-
+  const btn = document;
   const selectPromis = new Promis((resolve, reject) => {
     if (select_input === 'fulfilled') {
       resolve(`✅ Fulfilled promise in ${value_input}ms`);
@@ -18,7 +18,7 @@ form.addEventListener('submit', event => {
     }
   }, value_input);
 
-  promise
+  selectPromis
     .then(value_input => {
       iziToast.success({
         title: 'Success',
