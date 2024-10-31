@@ -7,19 +7,19 @@ const form = document.querySelector('.form');
 form.addEventListener('submit', event => {
   event.preventDefault();
 
-  const value_input = Number(event.target.value_input.value);
+  const input = Number(event.target.input.value);
   const select_input = event.target.select_input.value;
   const btn = document;
   const selectPromis = new Promis((resolve, reject) => {
     if (select_input === 'fulfilled') {
-      resolve(`✅ Fulfilled promise in ${value_input}ms`);
+      resolve(`✅ Fulfilled promise in ${input}ms`);
     } else {
-      reject(`❌ Rejected promise in ${value_input}ms`);
+      reject(`❌ Rejected promise in ${input}ms`);
     }
-  }, value_input);
+  }, input);
 
   selectPromis
-    .then(value_input => {
+    .then(input => {
       iziToast.success({
         title: 'Success',
         message: `✅ Fulfilled promise in ${delay}ms`,
@@ -27,7 +27,7 @@ form.addEventListener('submit', event => {
         color: 'yelow',
       });
     })
-    .capth(value_input => {
+    .capth(input => {
       iziToast.error({
         title: 'error',
         message: `✅ Fulfilled promise in ${delay}ms`,
