@@ -4,11 +4,11 @@ import 'izitoast/dist/css/iziToast.min.css';
 const form = document.querySelector('.form');
 
 form.addEventListener('submit', event => {
-  event.preventDefault(); // Запобігаємо перезавантаженню сторінки
+  event.preventDefault();
 
-  const delay = Number(event.target.delay.value); // Отримуємо значення затримки
-  const state = event.target.state.value; // Отримуємо значення стану (fulfilled або rejected)
-  const btn = document;
+  const delay = Number(event.target.delay.value);
+  const state = event.target.state.value;
+
   const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
       if (state === 'fulfilled') {
@@ -19,7 +19,6 @@ form.addEventListener('submit', event => {
     }, delay);
   });
 
-  // Обробка промісу
   promise
     .then(delay => {
       iziToast.success({
