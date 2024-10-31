@@ -22,15 +22,18 @@ form.addEventListener('submit', event => {
     }
   }, value_input);
 });
-selectPromis().then(value_input => {
-  iziToast.success({
-    title: 'Success',
-    message: `✅ Fulfilled promise in ${delay}ms`,
-    position: 'topRight',
+selectPromis()
+  .then(value_input => {
+    iziToast.success({
+      title: 'Success',
+      message: `✅ Fulfilled promise in ${delay}ms`,
+      position: 'topRight',
+    });
+  })
+  .capth(value_input => {
+    iziToast.error({
+      title: 'error',
+      message: `✅ Fulfilled promise in ${delay}ms`,
+      position: 'topRight',
+    });
   });
-  iziToast.error({
-    title: 'error',
-    message: `✅ Fulfilled promise in ${delay}ms`,
-    position: 'topRight',
-  });
-});
