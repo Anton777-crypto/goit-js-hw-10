@@ -5,56 +5,32 @@ import 'izitoast/dist/css/iziToast.min.css';
 
 const input = document.querySelector('input[name="delay"]');
 const radio = document.querySelectorAll('input[name="state"]');
-
+const form = document.querySelector('.form');
 const btn = document.querySelector('.btn');
 
-function checkPromise() {
-  return new Promise((resolve, reject) => {
-    if (input.value > 0 && radio.value('fulfilled')) {
-      setTimeout(
-        () => resolve(`✅ Fulfilled promise in ${input.value}ms`),
-        input.value
-      );
-    } else
-      setTimeout(
-        () => reject(`❌ Rejected promise in ${input.value}ms`),
-        input.value
-      );
-  });
-}
-
-btn.addEventListener('click', event => {
+form.addEventListener('submit', event => {
   event.preventDefault();
-  if (!document.querySelector('.notification')) {
-    document.body.innerHTML += `<div class="notification"></div>`;
-  }
-  const notification = document.querySelector('.notification');
-  checkPromise()
-    .then(message => {
-      notification.innerHTML = `<div class="success">${message}</div>`;
-    })
-    .catch(message => {
-      notification.innerHTML = `<div class="error">${message}</div>`;
-    });
+
+  const value_input = Number(event.target.dalay.value);
+  const select_input = event.target.state.value;
+
+  const selectPromis = new Promis((resolve, reject) => {
+    if (select_input === 'fulfilled') {
+      resolve(`✅ Fulfilled promise in ${delay}ms`);
+    } else {
+      reject(`❌ Rejected promise in ${delay}ms`);
+    }
+  }, value_input);
 });
-
-// const radioButtons = document.querySelectorAll('.input_radio');
-//     const submitButton = document.getElementById('submitBtn');
-
-//     submitButton.addEventListener('click', function() {
-//         let selectedState;
-//         radioButtons.forEach(radio => {
-//             if (radio.checked) {
-//                 selectedState = radio.value;
-//             }
-//         });
-
-//         if (selectedState) {
-//             // Выбрано значение selectedState, выполните необходимые действия здесь
-//             console.log('Выбрано значение:', selectedState);
-//         } else {
-//             // Ни один из радио-кнопок не выбран
-//             console.log('Пожалуйста, выберите один из вариантов');
-//         }
-//     });
-// </script>
+selectPromis().then(value_input => {
+  iziToast.success({
+    title: 'Success',
+    message: `✅ Fulfilled promise in ${delay}ms`,
+    position: 'topRight',
+  });
+  iziToast.error({
+    title: 'error',
+    message: `✅ Fulfilled promise in ${delay}ms`,
+    position: 'topRight',
+  });
+});
