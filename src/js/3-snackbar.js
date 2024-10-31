@@ -9,7 +9,6 @@ form.addEventListener('submit', event => {
 
   const delay = Number(event.target.delay.value); // Отримуємо значення затримки
 
-  //   const input = Number(event.target.input.value);
   const state = event.target.state.value;
   const btn = document;
   const selectPromis = new Promise((resolve, reject) => {
@@ -18,7 +17,7 @@ form.addEventListener('submit', event => {
     } else {
       reject(`❌ Rejected promise in ${input}ms`);
     }
-  }, input);
+  }, delay);
 
   selectPromis
     .then(delay => {
