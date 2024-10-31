@@ -2,12 +2,13 @@
 import iziToast from 'izitoast';
 // Додатковий імпорт стилів
 import 'izitoast/dist/css/iziToast.min.css';
+const form = document.querySelector('.form');
 
 form.addEventListener('submit', event => {
   event.preventDefault();
 
   const value_input = Number(event.target.value_input.value);
-  const select_input = event.target.state.value;
+  const select_input = event.target.select_input.value;
 
   const selectPromis = new Promis((resolve, reject) => {
     if (select_input === 'fulfilled') {
