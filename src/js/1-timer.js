@@ -27,6 +27,7 @@ flatpickr(input, {
       iziToast.error({
         title: 'Ошибка',
         message: 'Please choose a date in the future',
+        position: 'topRight',
       });
       btn.disabled = true;
     } else {
